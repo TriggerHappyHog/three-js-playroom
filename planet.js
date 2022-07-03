@@ -2,11 +2,12 @@ import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/thr
     
     //three js
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000); //black
+    scene.background = new THREE.Color(0x000000, 0); //black
 
     const geometry = new THREE.SphereGeometry(1.5, 32, 32);
     const material = new THREE.MeshBasicMaterial({map: THREE.ImageUtils.loadTexture('imgs/saturnMap.jpg')});
-    const planet = new THREE.Mesh(geometry, material);
+    const materialBase = new THREE.MeshPhongMaterial({ color: 0xFF8001});
+    const planet = new THREE.Mesh(geometry, materialBase);
     planet.overdraw = true;
     planet.castShadow = true;
 
@@ -43,4 +44,6 @@ import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/thr
     renderer.render(scene, camera);
 
     //add it to html
-    document.body.appendChild(renderer.domElement);
+    var planetBox = document.getElementById("planet-box");
+    planetBox.appendChild(renderer.domElement);
+    // document.body.appendChild(renderer.domElement);
